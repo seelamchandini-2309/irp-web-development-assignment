@@ -1,0 +1,269 @@
+/* ==========================================================
+   IRP LMS Home Page: responsive styles
+   Layout tools: Flexbox, CSS Grid, Media Queries
+   ========================================================== */
+
+/* ---------- Design tokens ---------- */
+:root {
+  --color-primary-navy: #003366;
+  --color-primary-orange: #FE781E;
+  --color-secondary-blue: #5F9FE0;
+  --color-bg-light: #E2F2FD;
+  --color-card-bg: #FFFFFF;
+  --color-border-light: #D6E9FF;
+
+  --header-height: 68px;
+  --radius-card: 12px;
+  --radius-btn: 999px;
+  --font-main: "Poppins", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+/* ---------- Reset / base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* Keeps anchored sections from hiding under the sticky header */
+  scroll-padding-top: var(--header-height);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  color: var(--color-primary-navy);
+  background: var(--color-card-bg);
+  line-height: 1.6;
+  overflow-x: hidden; /* safety net: no sideways scroll */
+}
+
+img { max-width: 100%; height: auto; display: block; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 3px solid var(--color-secondary-blue);
+  outline-offset: 3px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px; /* comfortable touch target */
+  padding: 0 1.5rem;
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  font-size: 1rem;
+  border: 2px solid var(--color-primary-orange);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn--outline {
+  color: var(--color-primary-orange);
+  background: transparent;
+}
+.btn--outline:hover { background: var(--color-primary-orange); color: #fff; }
+
+.btn--solid {
+  color: #fff;
+  background: var(--color-primary-orange);
+  padding: 0 2rem;
+  min-height: 50px;
+}
+.btn--solid:hover { background: #e56510; border-color: #e56510; }
+
+/* ---------- Navigation bar (CSS positioning) ---------- */
+.site-header {
+  position: sticky;   /* stays anchored while content scrolls beneath */
+  top: 0;
+  z-index: 1000;
+  background: var(--color-card-bg);
+  border-bottom: 1px solid var(--color-border-light);
+  box-shadow: 0 2px 8px rgba(0, 51, 102, 0.06);
+}
+
+.navbar {
+  max-width: 1200px;
+  height: var(--header-height);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand { display: flex; align-items: center; gap: 0.6rem; }
+.brand__logo { width: 40px; height: 40px; object-fit: contain; }
+.brand__name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary-navy);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 0.4rem 0;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s ease;
+}
+.nav-link:hover { color: var(--color-primary-orange); }
+.nav-link--active { border-bottom-color: var(--color-primary-orange); }
+
+/* ---------- Hero ---------- */
+.hero { background: var(--color-bg-light); }
+
+.hero__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* 2 columns on desktop */
+  align-items: center;
+  gap: 3rem;
+}
+
+.hero__kicker {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-primary-orange);
+}
+
+.hero__title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  line-height: 1.15;
+  color: var(--color-primary-navy);
+}
+.accent { color: var(--color-primary-orange); }
+
+.hero__subtitle {
+  margin: 0 0 2rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  color: var(--color-primary-navy);
+}
+
+.hero__media { display: flex; justify-content: center; }
+.hero__image { width: 100%; max-width: 560px; }
+
+/* ---------- Learning journey ---------- */
+.journey { background: var(--color-card-bg); }
+
+.journey__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.journey__title {
+  margin: 0 0 0.5rem;
+  text-align: center;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--color-primary-navy);
+}
+
+.journey__subtitle {
+  margin: 0 auto 2.5rem;
+  max-width: 36rem;
+  text-align: center;
+  color: var(--color-secondary-blue);
+  font-weight: 500;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);  /* desktop: 5 columns */
+  gap: 1.25rem;
+}
+
+.step-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-card);
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.step-card__number {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-primary-orange);
+}
+
+.step-card__title {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+  color: var(--color-primary-navy);
+}
+
+.step-card__text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-primary-navy);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #fff;
+  background: var(--color-primary-navy);
+}
+.site-footer p { margin: 0; }
+
+/* ==========================================================
+   Tablet: up to 1024px, cards wrap into 3 columns
+   ========================================================== */
+@media (max-width: 1024px) {
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  .hero__inner { gap: 2rem; padding: 3rem 1.5rem; }
+}
+
+/* ==========================================================
+   Mobile: up to 768px
+   ========================================================== */
+@media (max-width: 768px) {
+  :root { --header-height: 60px; }
+
+  .nav-links { display: none; }          /* links collapse; brand + Sign In remain */
+  .navbar { padding: 0 1rem; }
+  .brand__logo { width: 34px; height: 34px; }
+  .brand__name { font-size: 1.15rem; }
+  .btn--outline { padding: 0 1.25rem; }
+
+  .hero__inner {
+    grid-template-columns: 1fr;           /* stacked hero */
+    padding: 2.5rem 1.25rem 3rem;
+    text-align: left;
+  }
+  .hero__media { order: 2; }
+  .hero__image { max-width: 100%; }
+
+  .journey__inner { padding: 3rem 1.25rem 3.5rem; }
+  .journey__title, .journey__subtitle { text-align: left; margin-left: 0; }
+
+  .steps { grid-template-columns: 1fr; }  /* strict single column */
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
